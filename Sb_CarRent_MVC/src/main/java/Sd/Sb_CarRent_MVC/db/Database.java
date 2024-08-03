@@ -25,7 +25,7 @@ public class Database {
 		
 	}
 
-	public List<Car> getCarsByBetweenDate(LocalDate from, LocalDate to) {
+	public List<Car> getCarsBetweenDates(LocalDate from, LocalDate to) {
 
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
@@ -45,7 +45,6 @@ public class Database {
 		
 		List<Car> cars = query.getResultList();		
 		
-		System.out.println(cars);
 		
 		tx.commit();
 		session.close();

@@ -30,7 +30,7 @@ public class AppService {
 
 		CarListDto carListDto = null;
 		
-		List<Car> cars = db.getCarsByBetweenDate(from, to);
+		List<Car> cars = db.getCarsBetweenDates(from, to);
 		
 		if(cars.size() > 0) {
 			carListDto = convertCarListToCarListDto(cars);
@@ -63,6 +63,26 @@ public class AppService {
 	
 		
 		return carListDto;
+	}
+
+
+
+	public boolean isDataCorrect(LocalDate from, LocalDate to, int carId) {
+
+		boolean result = false;
+		
+		List<Car> cars = db.getCarsBetweenDates(from, to);
+		
+		for(int index = 0; index < cars.size(); index++) {
+			
+			int currCarId = cars.get(index).getId();
+			if(currCarId == carId) {
+				result = true;
+				break;
+			}
+		}
+		
+		return result;
 	}
 
 }

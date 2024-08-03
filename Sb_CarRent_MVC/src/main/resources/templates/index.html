@@ -21,6 +21,14 @@
 				<td th:text="${carDto.getName()}"></td>
 				<td th:text="${carDto.getFeePerDay()}"></td>
 				<td></td>
+				<td>
+					<form action="/rentform" method="get">
+						<input type="hidden" name="carid" th:value="${carDto.getId()}"/>
+						<input type="hidden" name="from" th:value="${rentDto.getFrom()}"/>
+						<input type="hidden" name="to" th:value="${rentDto.getTo()}"/>
+						<input type="submit" value="Choose"/>
+					</form>
+				</td>
 			</tr>
 		</table>
 	</body>

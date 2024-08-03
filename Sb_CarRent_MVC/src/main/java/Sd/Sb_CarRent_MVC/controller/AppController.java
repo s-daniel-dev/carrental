@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import Sd.Sb_CarRent_MVC.dto.CarListDto;
+import Sd.Sb_CarRent_MVC.dto.RentDto;
 import Sd.Sb_CarRent_MVC.service.AppService;
 
 @Controller
@@ -34,11 +35,63 @@ public class AppController {
 			@RequestParam("from") LocalDate from,
 			@RequestParam("to") LocalDate to
 			) {
+		
 		CarListDto carListDto = service.getCarListByDate(from, to);
+		RentDto rentDto = new RentDto(from, to);
 		
 		model.addAttribute("carListDto", carListDto);
+		model.addAttribute("rentDto", rentDto);
 		
 		return "index.html";
 	}
+	
+	
+	@GetMapping("/rentform")
+	public String showRentForm(
+				Model model,
+				@RequestParam("carid") int carId,
+				@RequestParam("from") LocalDate from,
+				@RequestParam("to") LocalDate to
+			) {
+		
+		String result = "index.html";
+		RentDto rentDto = null;
+		boolean dataIsGood = service.isDataCorrect(from, to, carId);
+		
+		
+		if(dataIsGood == true) {
+			result = "rentform.html";
+			rentDto = new RentDto(from, to, carId);
+			model.addAttribute("rentDto", rentDto);
+		}
+		
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
