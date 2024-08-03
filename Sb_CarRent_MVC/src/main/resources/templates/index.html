@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<form action="/car/rentable" method="get">
+			<input type="date" name="from" required />
+			<input type="date" name="to" required />
+			<input type="submit" />
+		</form>
+		
+		<table th:if="${carListDto != null}">
+			<tr>
+				<th>Name</th>
+				<th>Fee/Day</th>
+				<th>Picture</th>
+			</tr>
+			<tr th:each="carDto : ${carListDto.getCarDtoList()}">
+				<td th:text="${carDto.getName()}"></td>
+				<td th:text="${carDto.getFeePerDay()}"></td>
+				<td></td>
+			</tr>
+		</table>
+	</body>
+</html>
