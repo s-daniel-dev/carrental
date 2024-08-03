@@ -11,6 +11,8 @@ import org.hibernate.query.SelectionQuery;
 import org.springframework.stereotype.Repository;
 
 import Sd.Sb_CarRent_MVC.model.Car;
+import Sd.Sb_CarRent_MVC.model.Lease;
+import Sd.Sb_CarRent_MVC.model.User;
 
 @Repository
 public class Database {
@@ -51,6 +53,39 @@ public class Database {
 		
 		
 		return cars;
+	}
+
+	public int persistUser(User user) {
+
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		session.persist(user);
+		SelectionQuery<User> query = session.createSelectionQuery(
+					"SELECT u FROM User u WHERE u.id = (SELECT MAX(u.id) FROM User u)",
+					User.class
+				);
+		
+		User newUser = query.getSingleResult();
+		
+		tx.commit();
+		session.close();
+		
+		
+		return newUser.getId();
+	}
+
+	public void persistLease(Lease lease) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		session.persist(lease);
+		
+		tx.commit();
+		session.close();
+		
 	}
 	
 	

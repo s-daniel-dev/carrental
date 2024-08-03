@@ -5,6 +5,7 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
+		<p th:if="${resultDto != null && resultDto.isSuccess() == true}">Your car reservation is saved.</p>
 		<form action="/car/rentable" method="get">
 			<input type="date" name="from" required />
 			<input type="date" name="to" required />

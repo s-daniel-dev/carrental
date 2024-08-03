@@ -5,11 +5,11 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		<form action="/rentform/newrent">
+		<form action="/rentform/newrent" method="post">
 			<input type="text" name="name" placeholder="Name"  required/>
 			<input type="text" name="address" placeholder="Address"  required/>
 			<input type="email" name="email" placeholder="E-Mail"  required/>
-			<input type="tel" name="pnumber" placeholder="Phone number"  required/>
+			<input type="text" name="pnumber" placeholder="Phone number"  required/>
 			<input type="hidden" name="carid" th:value="${rentDto.getCarId()}" />
 			<input type="hidden" name="from" th:value="${rentDto.getFrom()}" />
 			<input type="hidden" name="to" th:value="${rentDto.getTo()}" />

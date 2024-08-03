@@ -11,6 +11,8 @@ import Sd.Sb_CarRent_MVC.db.Database;
 import Sd.Sb_CarRent_MVC.dto.CarDto;
 import Sd.Sb_CarRent_MVC.dto.CarListDto;
 import Sd.Sb_CarRent_MVC.model.Car;
+import Sd.Sb_CarRent_MVC.model.Lease;
+import Sd.Sb_CarRent_MVC.model.User;
 
 @Service
 public class AppService {
@@ -83,6 +85,56 @@ public class AppService {
 		}
 		
 		return result;
+	}
+
+
+
+	public void saveLeaseAndUser(
+				String name, String address, 
+				String email, String phoneNumber,
+				int carId, LocalDate from,
+				LocalDate to
+			) {
+
+		User user = new User();
+		user.setId(0);
+		user.setAddress(address);
+		user.setEmail(email);
+		user.setPhoneNumber(phoneNumber);
+		user.setName(name);
+		
+		int userId = db.persistUser(user);
+		
+		Lease lease = new Lease();
+		lease.setId(0);
+		lease.setCarId(carId);
+		lease.setUserId(userId);
+		lease.setFrom(from);
+		lease.setTo(to);
+		
+		db.persistLease(lease);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 }

@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import Sd.Sb_CarRent_MVC.dto.CarListDto;
 import Sd.Sb_CarRent_MVC.dto.RentDto;
+import Sd.Sb_CarRent_MVC.dto.ResultDto;
 import Sd.Sb_CarRent_MVC.service.AppService;
 
 @Controller
@@ -67,6 +69,27 @@ public class AppController {
 		
 		
 		return result;
+	}
+	
+	@PostMapping("/rentform/newrent")
+	public String saveReservation(
+				Model model,
+				@RequestParam("name") String name,
+				@RequestParam("address") String address,
+				@RequestParam("email") String email,
+				@RequestParam("pnumber") String phoneNumber,
+				@RequestParam("carid") int carId,
+				@RequestParam("from") LocalDate from,
+				@RequestParam("to") LocalDate to
+			) {
+		
+		service.saveLeaseAndUser(name, address, email, phoneNumber, carId, from, to);
+		
+		ResultDto resultDto = new ResultDto();
+		
+		model.addAttribute("resultDto", resultDto);
+		
+		return "index.html";
 	}
 	
 	
