@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<p th:if="${resultDto != null && resultDto.getSaveNewCar() != null && resultDto.getSaveNewCar() == true}">New car saved!</p>
+		<p th:if="${resultDto != null && resultDto.getChangeCar() != null && resultDto.getChangeCar() == true}">Change success!</p>
+		<p th:if="${resultDto != null && resultDto.getChangeCar() != null && resultDto.getChangeCar() == false}">
+			I cannot deactivate the car because it is reserved!</p>
+		
+		<table>
+			<tr>
+				<th>User name</th>
+				<th>Car name</th>
+				<th>From</th>
+				<th>To</th>
+			</tr>
+			<tr th:each="leaseDto : ${adminDto.getLeaseDtoList()}">
+				<td th:text="${leaseDto.getUserName()}"></td>
+				<td th:text="${leaseDto.getCarName()}"></td>
+				<td th:text="${leaseDto.getFrom()}"></td>
+				<td th:text="${leaseDto.getTo()}"></td>
+			</tr>
+		<form th:each="carDto : ${adminDto.getCarDtoList()}" action="/admin/car/change" method="post">
+			<input type="hidden" name="carid" th:value="${carDto.getId()}"/>
+			<input type="text" name="name" th:value="${carDto.getName()}" required/>
+			<input type="number" name="fee" th:value="${carDto.getFeePerDay()}" required/>
+			<select th:if="${carDto.isActive() == true}" name="active">
+				<option value="true">Active</option>
+				<option value="false">Inactive</option>
+			</select>
+			<select th:if="${carDto.isActive() == false}" name="active">
+				<option value="false">Inactive</option>
+				<option value="true">Active</option>
+			</select>
+			<input type="submit" value="Change"/><br>
+		</form>
+		<form action="/admin/car/new" method="post">
+			<input type="text" name="name" placeholder="Name" required />
+			<input type="text" name="fee" placeholder="Fee/Day" required />
+			<select name="active">
+				<option value="true">Active</option>
+				<option value="false">Inactive</option>
+			</select>
+			<input type="submit" value="Save"/>
+		</form>
+	</body>
+</html>

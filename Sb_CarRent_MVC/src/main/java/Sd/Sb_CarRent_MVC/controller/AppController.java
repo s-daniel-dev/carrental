@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import Sd.Sb_CarRent_MVC.dto.AdminDto;
 import Sd.Sb_CarRent_MVC.dto.CarListDto;
 import Sd.Sb_CarRent_MVC.dto.RentDto;
 import Sd.Sb_CarRent_MVC.dto.ResultDto;
@@ -93,7 +94,54 @@ public class AppController {
 	}
 	
 	
+	@GetMapping("/admin")
+	public String showAdminInterface(Model model) {
+		
+		AdminDto adminDto = service.getAdminDto();
+		
+		model.addAttribute("adminDto", adminDto);
+		
+		return "admin.html";
+	}
 	
+	@PostMapping("/admin/car/change")
+	public String showChangeCarResult(
+				Model model,
+				@RequestParam("carid") int carId,
+				@RequestParam("name") String name,
+				@RequestParam("fee") int feePerDay,
+				@RequestParam("active") String active
+			) {
+		
+		ResultDto resultDto = service.changeCar(carId, name, feePerDay, active);
+		
+		AdminDto adminDto = service.getAdminDto();
+		
+		model.addAttribute("adminDto", adminDto);
+		
+		model.addAttribute("resultDto", resultDto);
+		
+		return "admin.html";
+	}
+	
+	@PostMapping("/admin/car/new")
+	public String showSaveNewCarResult(
+			Model model,
+			@RequestParam("name") String name,
+			@RequestParam("fee") int feePerDay,
+			@RequestParam("active") String active
+			) {
+		
+		ResultDto resultDto = service.saveNewCar(name, feePerDay, active);
+		
+		AdminDto adminDto = service.getAdminDto();
+		
+		model.addAttribute("adminDto", adminDto);
+		
+		model.addAttribute("resultDto", resultDto);
+		
+		return "admin.html";
+	}
 	
 	
 	

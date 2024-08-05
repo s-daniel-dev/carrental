@@ -87,6 +87,97 @@ public class Database {
 		session.close();
 		
 	}
+
+	public List<Car> getCarList() {
+
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		SelectionQuery<Car> query = session.createSelectionQuery("SELECT c FROM Car c", Car.class);
+		
+		List<Car> cars = query.getResultList();
+		
+		tx.commit();
+		session.close();
+		
+		
+		return cars;
+	}
+
+	public List<Lease> getLeaseList() {
+
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		SelectionQuery<Lease> query = session.createSelectionQuery("SELECT l FROM Lease l", Lease.class);
+		
+		List<Lease> leases = query.getResultList();
+		
+		tx.commit();
+		session.close();
+		
+		return leases;
+	}
+
+	public String getUserNameById(int userId) {
+
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		User user = session.get(User.class, userId);
+		
+		tx.commit();
+		session.close();
+		
+		String userName = user.getName();
+		
+		
+		return userName;
+	}
+
+	public void mergeCar(Car car) {
+
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		session.merge(car);
+		
+		tx.commit();
+		session.close();
+		
+		
+	}
+
+	public List<Lease> getLeaseListByCarId(int carId) {
+
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		SelectionQuery<Lease> query = session.createSelectionQuery(
+					"SELECT l FROM Lease l WHERE l.carId=?1",
+					Lease.class
+				);
+		query.setParameter(1, carId);
+		
+		List<Lease> leases = query.getResultList();
+		
+		tx.commit();
+		session.close();
+		
+		return leases;
+	}
+
+	public void persistCar(Car car) {
+
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		session.persist(car);
+		
+		tx.commit();
+		session.close();
+		
+	}
 	
 	
 	
