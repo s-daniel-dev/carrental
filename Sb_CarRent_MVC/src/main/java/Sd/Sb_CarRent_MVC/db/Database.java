@@ -55,25 +55,19 @@ public class Database {
 		return cars;
 	}
 
-	public int persistUser(User user) {
+	public void persistUser(User user) {
 
 		
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		
 		session.persist(user);
-		SelectionQuery<User> query = session.createSelectionQuery(
-					"SELECT u FROM User u WHERE u.id = (SELECT MAX(u.id) FROM User u)",
-					User.class
-				);
 		
-		User newUser = query.getSingleResult();
 		
 		tx.commit();
 		session.close();
 		
 		
-		return newUser.getId();
 	}
 
 	public void persistLease(Lease lease) {

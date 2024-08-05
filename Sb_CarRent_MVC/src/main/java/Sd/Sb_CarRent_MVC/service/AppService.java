@@ -84,12 +84,12 @@ public class AppService {
 		user.setPhoneNumber(phoneNumber);
 		user.setName(name);
 		
-		int userId = db.persistUser(user);
+		db.persistUser(user);
 		
 		Lease lease = new Lease();
 		lease.setId(0);
 		lease.setCarId(carId);
-		lease.setUserId(userId);
+		lease.setUserId(user.getId());
 		lease.setFrom(from);
 		lease.setTo(to);
 		
@@ -207,10 +207,10 @@ public class AppService {
 				car.setPicture(null);
 				
 				db.mergeCar(car);
-				resultDto.setChangeCar(MyBoolean.TRUE);
+				resultDto.setChangeCar(true);
 			}
 			else {
-				resultDto.setChangeCar(MyBoolean.FALSE);
+				resultDto.setChangeCar(false);
 			}
 		}
 		else {
@@ -222,7 +222,7 @@ public class AppService {
 			car.setPicture(null);
 			
 			db.mergeCar(car);
-			resultDto.setChangeCar(MyBoolean.TRUE);
+			resultDto.setChangeCar(true);
 		}
 		
 		
@@ -260,7 +260,7 @@ public class AppService {
 	public ResultDto saveNewCar(String name, int feePerDay, String active) {
 
 		ResultDto resultDto = new ResultDto();
-		resultDto.setSaveNewCar(MyBoolean.TRUE);
+		resultDto.setSaveNewCar(true);
 		boolean isActive = false;
 		
 		if(active.equals("true")) {

@@ -5,9 +5,9 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		<p th:if="${resultDto != null && resultDto.getSaveNewCar() == MyBoolean.TRUE}">New car saved!</p>
-		<p th:if="${resultDto != null && resultDto.getChangeCar() == MyBoolean.TRUE}">Change success!</p>
-		<p th:if="${resultDto != null && resultDto.getChangeCar() == MyBoolean.FALSE}">
+		<p th:if="${resultDto != null && resultDto.getSaveNewCar() == true}">New car saved!</p>
+		<p th:if="${resultDto != null && resultDto.getChangeCar() == true}">Change success!</p>
+		<p th:if="${resultDto != null && resultDto.getChangeCar() == false}">
 			I cannot deactivate the car because it is reserved!</p>
 		
 		<table>
