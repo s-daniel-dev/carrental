@@ -12,6 +12,7 @@ import Sd.Sb_CarRent_MVC.dto.AdminDto;
 import Sd.Sb_CarRent_MVC.dto.CarDto;
 import Sd.Sb_CarRent_MVC.dto.CarListDto;
 import Sd.Sb_CarRent_MVC.dto.LeaseDto;
+import Sd.Sb_CarRent_MVC.dto.MyBoolean;
 import Sd.Sb_CarRent_MVC.dto.ResultDto;
 import Sd.Sb_CarRent_MVC.model.Car;
 import Sd.Sb_CarRent_MVC.model.Lease;
@@ -206,10 +207,10 @@ public class AppService {
 				car.setPicture(null);
 				
 				db.mergeCar(car);
-				resultDto.setChangeCar(true);
+				resultDto.setChangeCar(MyBoolean.TRUE);
 			}
 			else {
-				resultDto.setChangeCar(false);
+				resultDto.setChangeCar(MyBoolean.FALSE);
 			}
 		}
 		else {
@@ -221,7 +222,7 @@ public class AppService {
 			car.setPicture(null);
 			
 			db.mergeCar(car);
-			resultDto.setChangeCar(true);
+			resultDto.setChangeCar(MyBoolean.TRUE);
 		}
 		
 		
@@ -259,7 +260,7 @@ public class AppService {
 	public ResultDto saveNewCar(String name, int feePerDay, String active) {
 
 		ResultDto resultDto = new ResultDto();
-		resultDto.setSaveNewCar(true);
+		resultDto.setSaveNewCar(MyBoolean.TRUE);
 		boolean isActive = false;
 		
 		if(active.equals("true")) {

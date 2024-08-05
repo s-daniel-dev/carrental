@@ -3,14 +3,14 @@ package Sd.Sb_CarRent_MVC.dto;
 public class ResultDto {
 	
 	private boolean success;
-	private Boolean saveNewCar;
-	private Boolean changeCar;
+	private MyBoolean saveNewCar;
+	private MyBoolean changeCar;
 
 	public ResultDto() {
 		super();
 		this.success = true;
-		this.saveNewCar = null;
-		this.changeCar = null;
+		this.saveNewCar = MyBoolean.NULL;
+		this.changeCar = MyBoolean.NULL;
 	}
 
 	public boolean isSuccess() {
@@ -21,22 +21,23 @@ public class ResultDto {
 		this.success = success;
 	}
 
-	public Boolean getSaveNewCar() {
+	public MyBoolean getSaveNewCar() {
 		return saveNewCar;
 	}
 
-	public void setSaveNewCar(Boolean saveNewCar) {
+	public void setSaveNewCar(MyBoolean saveNewCar) {
 		this.saveNewCar = saveNewCar;
 	}
 
-	public Boolean getChangeCar() {
+	public MyBoolean getChangeCar() {
 		return changeCar;
 	}
 
-	public void setChangeCar(Boolean changeCar) {
+	public void setChangeCar(MyBoolean changeCar) {
 		this.changeCar = changeCar;
 	}
 
+	
 	
 
 }
